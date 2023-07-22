@@ -106,7 +106,7 @@ def edit_item():
         selected_item = table.selection()[0]
         table.item(selected_item, values=(min_entry.get(), sub_entry.get()))
         popup.destroy()
-
+	update_total()
     popup = tk.Tk()
     popup.title("Edit")
     selected_item = table.item(table.selection())["values"]
@@ -237,7 +237,7 @@ quit_button.grid(row=12, column=0, columnspan=2, sticky="nsew")
 def about_page():
     import webbrowser
     message = "This program was created by Mobin Babaee using Python and the Tkinter library.\n\nThank you for using this program!\n\nPlease check out the GitHub repository for the latest updates and to report issues:\n\n"
-    link = "https://github.com/mobinbabaee/sales-receipt"
+    link = "https://github.com/mobinbabaee/study-times"
     result = messagebox.askquestion("About", message+"Would you like to go to the GitHub repository?", icon="info")
     if result == "yes":
         webbrowser.open_new(link)
