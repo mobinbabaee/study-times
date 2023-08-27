@@ -105,8 +105,9 @@ def edit_item():
     def save_changes():
         selected_item = table.selection()[0]
         table.item(selected_item, values=(min_entry.get(), sub_entry.get()))
+        update_total()
         popup.destroy()
-	update_total()
+
     popup = tk.Tk()
     popup.title("Edit")
     selected_item = table.item(table.selection())["values"]
@@ -139,14 +140,16 @@ delete_button = tk.Button(root, text="Delete", command=delete_item, background="
 delete_button.grid(row=8, column=0, columnspan=2, sticky="nsew")
 
 def get_save():
-    file = open(f'database/{datetime.datetime.now().strftime("%y%m%d")}.txt',mode='w')
-    file.write(time_entry.get()+'\n')
-    for child in table.get_children():
-        for i in table.item(child)["values"]:
-            file.write(str(i)+'\t\t')
-        file.write('\n')
-    file.write(str(f'{get_total()}'))
-    file.close()
+	fname=str('database/'+str(str(time_entry.get())[0:8]).replace("/","")+'.txt')
+	print(fname)
+	file = open(fname,mode='w')
+	file.write(time_entry.get()+'\n')
+	for child in table.get_children():
+		for i in table.item(child)["values"]:
+			file.write(str(i)+'\t\t')
+		file.write('\n')
+	file.write(str(f'{get_total()}'))
+	file.close()
 
 def get_open():
     file = open(askopenfilename(initialfile = f'database/{datetime.datetime.now().strftime("%y%m%d")}.txt', defaultextension=".txt",filetypes=[("All Files","*.*"),("Text Documents","*.txt")]), mode='r')
